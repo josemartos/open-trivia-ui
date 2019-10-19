@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
+import QuestionContext from '../../context/QuestionContext';
 
 const PageRoot = ({ children }) => {
   const [preload, setPreload] = useState('preload');
+  const question = useState({});
 
   useEffect(() => {
     setPreload('');
@@ -12,9 +14,11 @@ const PageRoot = ({ children }) => {
   return (
     <div className={`page-root ${preload}`}>
       <Header />
-      <main className="page-main">
-        <section>{children}</section>
-      </main>
+      <QuestionContext.Provider value={question}>
+        <main className="page-main">
+          <section>{children}</section>
+        </main>
+      </QuestionContext.Provider>
       <Footer />
     </div>
   );

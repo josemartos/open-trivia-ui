@@ -1,5 +1,17 @@
+import { useContext } from 'react';
+import Router from 'next/router';
+import QuestionContext from '../context/QuestionContext';
+
 // TODO: abstract away a table component
 const QuestionsTable = ({ questions }) => {
+  // it only gets the setter
+  const [, setQuestion] = useContext(QuestionContext);
+
+  function handleClick(questionInfo) {
+    setQuestion(questionInfo);
+    Router.push('/question');
+  }
+
   return (
     <div className="table-wrapper">
       <table className="table">
@@ -16,15 +28,21 @@ const QuestionsTable = ({ questions }) => {
               <td colSpan="3">Loading...</td>
             </tr>
           ) : (
-            questions.map((question, index) => (
+            questions.map((item, index) => (
               <tr key={index}>
                 <td>
-                  <a title="Discover more" role="link" tabIndex={0}>
-                    {question.question}
+                  <a
+                    title="Discover more"
+                    role="link"
+                    tabIndex={0}
+                    onClick={() => handleClick(item)}
+                    onKeyPress={() => handleClick(item)}
+                  >
+                    {item.question}
                   </a>
                 </td>
-                <td>{question.category}</td>
-                <td>{question.difficulty}</td>
+                <td>{item.category}</td>
+                <td>{item.difficulty}</td>
               </tr>
             ))
           )}
