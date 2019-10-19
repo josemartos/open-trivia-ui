@@ -5,7 +5,7 @@ import QuestionContext from '../../context/QuestionContext';
 
 const PageRoot = ({ children }) => {
   const [preload, setPreload] = useState('preload');
-  const question = useState({});
+  const selectedQuestion = useState({});
 
   useEffect(() => {
     setPreload('');
@@ -14,7 +14,7 @@ const PageRoot = ({ children }) => {
   return (
     <div className={`page-root ${preload}`}>
       <Header />
-      <QuestionContext.Provider value={question}>
+      <QuestionContext.Provider value={selectedQuestion}>
         <main className="page-main">{children}</main>
       </QuestionContext.Provider>
       <Footer />

@@ -5,7 +5,7 @@ import QuestionContext from '../context/QuestionContext';
 import QuestionInfo from '../components/QuestionInfo';
 
 const QuestionPage = () => {
-  const [question] = useContext(QuestionContext);
+  const [selectedQuestion] = useContext(QuestionContext);
 
   return (
     <section className="question-page">
@@ -14,10 +14,10 @@ const QuestionPage = () => {
       </Head>
       <article>
         <div className="page-container">
-          {!question.question ? (
+          {!selectedQuestion.question ? (
             <div>No question</div>
           ) : (
-            <QuestionInfo question={question} />
+            <QuestionInfo question={selectedQuestion} />
           )}
           <Link href="/">
             <a title="Home page">back to the list</a>

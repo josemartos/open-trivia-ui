@@ -5,12 +5,13 @@ import QuestionContext from '../context/QuestionContext';
 const entities = require('entities');
 
 // TODO: abstract away a table component
-const QuestionsTable = ({ questions }) => {
+const QuestionsTable = ({ category, questions }) => {
   // it only gets the setter
-  const [, setQuestion] = useContext(QuestionContext);
+  const [, setSelectedQuestion] = useContext(QuestionContext);
 
   function handleClick(questionInfo) {
-    setQuestion(questionInfo);
+    questionInfo = { ...questionInfo, ...{ category_id: category } };
+    setSelectedQuestion(questionInfo);
     Router.push('/question');
   }
 
