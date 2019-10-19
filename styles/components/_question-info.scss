@@ -1,0 +1,21 @@
+.question-info {
+  h2 {
+    color: $c-grey400;
+    font-size: rem(20);
+  }
+
+  h3 {
+    color: $c-grey300;
+    font-size: rem(14);
+  }
+
+  ul > li {
+    color: $c-red;
+    font-size: rem(16);
+  }
+
+  .question-correct {
+    color: $c-green;
+    background-color: lighten($c-green, 40%);
+  }
+}

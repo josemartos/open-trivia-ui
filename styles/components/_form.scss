@@ -2,4 +2,10 @@
   select {
     margin-left: 1rem;
   }
+
+  @media screen and (max-width: $phablet) {
+    select {
+      margin-left: 0;
+    }
+  }
 }

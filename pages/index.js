@@ -17,7 +17,7 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (!category) return;
+    if (!category || isNaN(category)) return;
 
     setQuestions([]);
 
@@ -33,11 +33,11 @@ const HomePage = () => {
   }, [category]);
 
   return (
-    <div>
+    <section className="home-page">
       <Head>
         <title>Open Trivia UI - Home</title>
       </Head>
-      <article className="home-page">
+      <article>
         <div className="page-container">
           <CategoryDropdown />
           {category && questions ? (
@@ -47,7 +47,7 @@ const HomePage = () => {
           )}
         </div>
       </article>
-    </div>
+    </section>
   );
 };
 

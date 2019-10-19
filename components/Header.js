@@ -1,12 +1,19 @@
 import Link from 'next/link';
+import TriviaIcon from '../public/assets/svg/trivia-icon.svg';
 
 const Header = () => {
   return (
     <header className="header">
       <div className="page-container">
-        <Link href="/">
-          <a title="Open Trivia UI">Open Trivia UI</a>
-        </Link>
+        <div className="header-inner">
+          <Link href="/">
+            <a title="Open Trivia UI" className="header-logo">
+              <TriviaIcon width="64" height="64" />
+            </a>
+          </Link>
+
+          <h1>Open Trivia UI</h1>
+        </div>
       </div>
     </header>
   );

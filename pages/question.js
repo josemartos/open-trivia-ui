@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Link from 'next/link';
 import { useContext } from 'react';
 import QuestionContext from '../context/QuestionContext';
@@ -7,20 +8,23 @@ const QuestionPage = () => {
   const [question] = useContext(QuestionContext);
 
   return (
-    <article className="question-page">
-      <div className="page-container">
-        {!question.question ? (
-          'No question'
-        ) : (
-          <div>
+    <section className="question-page">
+      <Head>
+        <title>Open Trivia UI - Question</title>
+      </Head>
+      <article>
+        <div className="page-container">
+          {!question.question ? (
+            <div>No question</div>
+          ) : (
             <QuestionInfo question={question} />
-            <Link href="/">
-              <a title="Home page">back to the list</a>
-            </Link>
-          </div>
-        )}
-      </div>
-    </article>
+          )}
+          <Link href="/">
+            <a title="Home page">back to the list</a>
+          </Link>
+        </div>
+      </article>
+    </section>
   );
 };
 

@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import Router from 'next/router';
 import QuestionContext from '../context/QuestionContext';
 
+const entities = require('entities');
+
 // TODO: abstract away a table component
 const QuestionsTable = ({ questions }) => {
   // it only gets the setter
@@ -38,11 +40,11 @@ const QuestionsTable = ({ questions }) => {
                     onClick={() => handleClick(item)}
                     onKeyPress={() => handleClick(item)}
                   >
-                    {item.question}
+                    {entities.decodeHTML(item.question)}
                   </a>
                 </td>
-                <td>{item.category}</td>
-                <td>{item.difficulty}</td>
+                <td>{entities.decodeHTML(item.category)}</td>
+                <td>{entities.decodeHTML(item.difficulty)}</td>
               </tr>
             ))
           )}

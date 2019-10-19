@@ -15,9 +15,7 @@ const PageRoot = ({ children }) => {
     <div className={`page-root ${preload}`}>
       <Header />
       <QuestionContext.Provider value={question}>
-        <main className="page-main">
-          <section>{children}</section>
-        </main>
+        <main className="page-main">{children}</main>
       </QuestionContext.Provider>
       <Footer />
     </div>
