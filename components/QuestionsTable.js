@@ -10,6 +10,7 @@ const QuestionsTable = ({ category, questions }) => {
   const [, setSelectedQuestion] = useContext(QuestionContext);
 
   function handleClick(questionInfo) {
+    // It merges the category id into the object
     questionInfo = { ...questionInfo, ...{ category_id: category } };
     setSelectedQuestion(questionInfo);
     Router.push('/question');

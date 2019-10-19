@@ -4,9 +4,7 @@
 
 ## Description
 
-It consumes an open trivia database to show questions filtered by categories
-
-## Notes
+It consumes an [open trivia database](https://opentdb.com/api_config.php) to show questions filtered by category
 
 ## Setup
 
@@ -27,3 +25,15 @@ production / server
 ```sh
 npm start
 ```
+
+### Requirements
+
+Node.js 10+
+
+## To improve
+
+- Loader
+- Error handling
+- Pagination
+- Tests
+- Mobile debug

@@ -5,6 +5,7 @@ import QuestionContext from '../../context/QuestionContext';
 
 const PageRoot = ({ children }) => {
   const [preload, setPreload] = useState('preload');
+  // state hook format
   const selectedQuestion = useState({});
 
   useEffect(() => {

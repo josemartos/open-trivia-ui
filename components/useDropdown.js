@@ -25,6 +25,8 @@ const useDropdown = (label, defaultState, options) => {
       </label>
     </div>
   );
+
+  // state hook format
   return [state, Dropdown, updateState];
 };
 
