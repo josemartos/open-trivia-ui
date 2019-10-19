@@ -1,0 +1,48 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  color: $font-primary;
+  font-family: $font-base;
+  background-color: $c-white;
+  font-size: rem($font-base-size);
+}
+
+a {
+  color: $c-blue;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  transition: color 200ms;
+
+  &:hover {
+    transition: color 300ms;
+    color: darken($c-blue, 25%);
+  }
+}
+
+.page-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.page-main {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+.page-container {
+  max-width: $tablet;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+}
+
+// To avoid transitions before page load
+.preload * {
+  transition: none !important;
+}
