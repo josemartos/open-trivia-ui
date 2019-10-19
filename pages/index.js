@@ -2,9 +2,11 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import Api from '../utils/Api';
 import useDropdown from '../components/useDropdown';
+import QuestionsTable from '../components/QuestionsTable';
 
 const HomePage = () => {
   const [categories, setCategories] = useState([]);
+  const [questions, setQuestions] = useState([]);
   const [category, CategoryDropdown] = useDropdown('Category', '', categories);
 
   useEffect(() => {
@@ -17,7 +19,17 @@ const HomePage = () => {
   useEffect(() => {
     if (!category) return;
 
-    console.log('Do something!', category);
+    setQuestions([]);
+
+    Api.get('/api.php', {
+      params: {
+        amount: 10,
+        category
+      }
+    }).then(({ data }) => {
+      const { results } = data;
+      setQuestions(results || []);
+    });
   }, [category]);
 
   return (
@@ -28,6 +40,11 @@ const HomePage = () => {
       <article className="home-page">
         <div className="page-container">
           <CategoryDropdown />
+          {category && questions ? (
+            <QuestionsTable questions={questions} />
+          ) : (
+            ''
+          )}
         </div>
       </article>
     </div>

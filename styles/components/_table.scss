@@ -1,0 +1,50 @@
+$table-border: 1px solid $c-grey200;
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.table {
+  border: $table-border;
+  border-collapse: collapse;
+  text-align: left;
+  width: 100%;
+  font-size: rem(14);
+
+  thead {
+    color: $c-grey400;
+  }
+
+  th {
+    background-color: $c-grey200;
+  }
+
+  tbody {
+    background-color: $c-white;
+    overflow: auto;
+    position: relative;
+
+    tr:nth-child(even) {
+      background-color: $c-grey100;
+    }
+
+    tr > td:first-of-type {
+      min-width: 480px;
+    }
+  }
+
+  tr {
+    background-color: $c-white;
+
+    &:last-of-type {
+      border: none;
+    }
+  }
+
+  td,
+  th {
+    border: $table-border;
+    padding: rem(6) rem(12);
+    text-align: left;
+  }
+}
