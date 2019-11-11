@@ -1,15 +1,17 @@
 import Head from 'next/head';
-import { useEffect, useState, useContext } from 'react';
-import Api from '../utils/Api';
+import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import api from '../utils/api';
+import utils from '../utils';
 import useDropdown from '../components/useDropdown';
 import QuestionsTable from '../components/QuestionsTable';
-import QuestionContext from '../context/QuestionContext';
 
-const HomePage = () => {
-  const [selectedQuestion, setSelectedQuestion] = useContext(QuestionContext);
+const HomePage = props => {
   const [categories, setCategories] = useState([]);
   const [questions, setQuestions] = useState([]);
-  const selectedCategory = selectedQuestion ? selectedQuestion.category_id : '';
+  const selectedCategory = utils.isEmptyObject(props.question)
+    ? ''
+    : props.question.category_id;
   const [category, CategoryDropdown] = useDropdown(
     'Category',
     selectedCategory,
@@ -17,7 +19,8 @@ const HomePage = () => {
   );
 
   useEffect(() => {
-    Api.get('/api_category.php')
+    api
+      .get('/api_category.php')
       .then(({ data }) => {
         const { trivia_categories } = data;
         setCategories(trivia_categories || []);
@@ -31,14 +34,14 @@ const HomePage = () => {
     if (!category || isNaN(category)) return;
 
     setQuestions([]);
-    setSelectedQuestion({});
 
-    Api.get('/api.php', {
-      params: {
-        amount: 10,
-        category
-      }
-    })
+    api
+      .get('/api.php', {
+        params: {
+          amount: 10,
+          category
+        }
+      })
       .then(({ data }) => {
         const { results } = data;
         setQuestions(results || []);
@@ -67,4 +70,13 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+const mapStateToProps = state => {
+  return {
+    question: state.question
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(HomePage);

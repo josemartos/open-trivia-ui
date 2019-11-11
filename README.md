@@ -4,7 +4,11 @@
 
 ## Description
 
-It consumes an [open trivia database](https://opentdb.com/api_config.php) to show questions filtered by category
+It consumes an [open trivia database](https://opentdb.com/api_config.php) to show questions filtered by category.
+
+Although it is not necessary, I have included [redux](https://github.com/reduxjs/react-redux) (in the simplest possible way) for the sake of comparison with the new (and recently used) context API.
+I have also included [redux-persist](https://github.com/rt2zz/redux-persist) to preserve information after page reload.
+Note: For little examples like this, context is cleaner and more than enough. Redux is more verbose.
 
 ## Setup
 

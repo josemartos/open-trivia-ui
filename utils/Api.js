@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const Api = axios.create({
+const api = axios.create({
   baseURL: 'https://opentdb.com'
 });
 
-Api.interceptors.response.use(
+api.interceptors.response.use(
   response => {
     return response;
   },
@@ -15,4 +15,4 @@ Api.interceptors.response.use(
   }
 );
 
-export default Api;
+export default api;
