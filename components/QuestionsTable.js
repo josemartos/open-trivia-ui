@@ -1,15 +1,18 @@
+import { useContext } from 'react';
 import Router from 'next/router';
-import { connect } from 'react-redux';
-import { selectQuestion, updateQuestion } from '../redux/actions/actions';
+import QuestionContext from '../context/QuestionContext';
 
 const entities = require('entities');
 
 // TODO: abstract away a table component
-const QuestionsTable = props => {
-  function handleClick(selectedQuestion) {
-    props.selectQuestion(selectedQuestion);
+const QuestionsTable = ({ category, questions }) => {
+  // it only gets the setter
+  const [, setSelectedQuestion] = useContext(QuestionContext);
+
+  function handleClick(questionInfo) {
     // It merges the category id into the object
-    props.updateQuestion({ category_id: props.category });
+    questionInfo = { ...questionInfo, ...{ category_id: category } };
+    setSelectedQuestion(questionInfo);
     Router.push('/question');
   }
 
@@ -24,12 +27,12 @@ const QuestionsTable = props => {
           </tr>
         </thead>
         <tbody>
-          {!props.questions.length ? (
+          {!questions.length ? (
             <tr>
               <td colSpan="3">Loading...</td>
             </tr>
           ) : (
-            props.questions.map((item, index) => (
+            questions.map((item, index) => (
               <tr key={index}>
                 <td>
                   <a
@@ -53,10 +56,4 @@ const QuestionsTable = props => {
   );
 };
 
-export default connect(
-  null,
-  {
-    selectQuestion,
-    updateQuestion
-  }
-)(QuestionsTable);
+export default QuestionsTable;

@@ -1,10 +1,12 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { connect } from 'react-redux';
-import utils from '../utils';
+import { useContext } from 'react';
+import QuestionContext from '../context/QuestionContext';
 import QuestionInfo from '../components/QuestionInfo';
 
-const QuestionPage = props => {
+const QuestionPage = () => {
+  const [selectedQuestion] = useContext(QuestionContext);
+
   return (
     <section className="question-page">
       <Head>
@@ -12,10 +14,10 @@ const QuestionPage = props => {
       </Head>
       <article>
         <div className="page-container">
-          {utils.isEmptyObject(props.question) ? (
+          {!selectedQuestion.question ? (
             <div>No question</div>
           ) : (
-            <QuestionInfo question={props.question} />
+            <QuestionInfo question={selectedQuestion} />
           )}
           <Link href="/">
             <a title="Home page">back to the list</a>
@@ -26,13 +28,4 @@ const QuestionPage = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    question: state.question
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  null
-)(QuestionPage);
+export default QuestionPage;
