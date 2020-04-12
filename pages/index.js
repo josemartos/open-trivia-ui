@@ -3,18 +3,25 @@ import { useEffect, useState, useContext } from 'react';
 import Api from '../utils/Api';
 import useDropdown from '../components/useDropdown';
 import QuestionsTable from '../components/QuestionsTable';
-import QuestionContext from '../context/QuestionContext';
+import { QuestionContext } from '../context/QuestionContext';
+import { resetQuestion } from '../context/actions';
 
 const HomePage = () => {
-  const [selectedQuestion, setSelectedQuestion] = useContext(QuestionContext);
+  const { selectedQuestion, dispatch } = useContext(QuestionContext);
   const [categories, setCategories] = useState([]);
   const [questions, setQuestions] = useState([]);
-  const selectedCategory = selectedQuestion ? selectedQuestion.category_id : '';
-  const [category, CategoryDropdown] = useDropdown(
+  const selectedCategoryId = selectedQuestion
+    ? selectedQuestion.category_id
+    : '';
+  const [categoryId, CategoryDropdown] = useDropdown(
     'Category',
-    selectedCategory,
+    selectedCategoryId,
     categories
   );
+
+  const resetQuestions = () => {
+    setQuestions([]);
+  };
 
   useEffect(() => {
     Api.get('/api_category.php')
@@ -28,16 +35,16 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (!category || isNaN(category)) return;
+    if (!categoryId || isNaN(categoryId)) return;
 
-    setQuestions([]);
-    setSelectedQuestion({});
+    resetQuestions();
+    dispatch(resetQuestion());
 
     Api.get('/api.php', {
       params: {
         amount: 10,
-        category
-      }
+        category: categoryId,
+      },
     })
       .then(({ data }) => {
         const { results } = data;
@@ -46,7 +53,7 @@ const HomePage = () => {
       .catch(() => {
         // Handle error!
       });
-  }, [category]);
+  }, [categoryId]);
 
   return (
     <section className="home-page">
@@ -56,10 +63,8 @@ const HomePage = () => {
       <article>
         <div className="page-container">
           <CategoryDropdown />
-          {category && questions ? (
-            <QuestionsTable category={category} questions={questions} />
-          ) : (
-            ''
+          {categoryId && questions && (
+            <QuestionsTable categoryId={categoryId} questions={questions} />
           )}
         </div>
       </article>

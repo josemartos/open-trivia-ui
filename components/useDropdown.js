@@ -10,23 +10,24 @@ const useDropdown = (label, defaultState, options) => {
         <select
           id={id}
           value={state}
-          onChange={e => updateState(e.target.value)}
-          onBlur={e => updateState(e.target.value)}
+          onChange={(e) => updateState(e.target.value)}
+          onBlur={(e) => updateState(e.target.value)}
           disabled={!options.length}
         >
           <option>Select one</option>
-          {// TODO: Use a model
-          options.map(item => (
-            <option key={item.id} value={item.id}>
-              {item.name}
-            </option>
-          ))}
+          {
+            // TODO: Use a model
+            options.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))
+          }
         </select>
       </label>
     </div>
   );
 
-  // state hook format
   return [state, Dropdown, updateState];
 };
 

@@ -1,5 +1,16 @@
-import { createContext } from 'react';
+import { useReducer, createContext } from 'react';
+import { reducer } from './reducer';
 
-const QuestionContext = createContext([{ question: 'info' }, () => {}]);
+export const QuestionContext = createContext();
 
-export default QuestionContext;
+const QuestionProvider = ({ children }) => {
+  const [selectedQuestion, dispatch] = useReducer(reducer, null);
+
+  return (
+    <QuestionContext.Provider value={{ selectedQuestion, dispatch }}>
+      {children}
+    </QuestionContext.Provider>
+  );
+};
+
+export default QuestionProvider;

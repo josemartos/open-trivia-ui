@@ -2,10 +2,8 @@ const entities = require('entities');
 
 const QuestionInfo = ({ question }) => (
   <div className="question-info">
-    {!question ? (
-      ''
-    ) : (
-      <div>
+    {question && (
+      <>
         <h2>{entities.decodeHTML(question.question)}</h2>
         <h3>{entities.decodeHTML(question.category)}</h3>
         <ul>
@@ -16,7 +14,7 @@ const QuestionInfo = ({ question }) => (
             {entities.decodeHTML(question.correct_answer)}
           </li>
         </ul>
-      </div>
+      </>
     )}
   </div>
 );

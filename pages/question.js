@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext } from 'react';
-import QuestionContext from '../context/QuestionContext';
+import { QuestionContext } from '../context/QuestionContext';
 import QuestionInfo from '../components/QuestionInfo';
 
 const QuestionPage = () => {
-  const [selectedQuestion] = useContext(QuestionContext);
+  const { selectedQuestion } = useContext(QuestionContext);
 
   return (
     <section className="question-page">
@@ -14,7 +14,7 @@ const QuestionPage = () => {
       </Head>
       <article>
         <div className="page-container">
-          {!selectedQuestion.question ? (
+          {!selectedQuestion ? (
             <div>No question</div>
           ) : (
             <QuestionInfo question={selectedQuestion} />

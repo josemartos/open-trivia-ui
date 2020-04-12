@@ -1,20 +1,17 @@
 import React from 'react';
-import App from 'next/app';
+
 import PageRoot from '../components/layout/PageRoot';
+import QuestionProvider from '../context/QuestionContext';
 
 // main styles
 import '../styles/main.scss';
 
-class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props;
-
-    return (
-      <PageRoot>
-        <Component {...pageProps} />
-      </PageRoot>
-    );
-  }
-}
+const MyApp = ({ Component, pageProps }) => (
+  <PageRoot>
+    <QuestionProvider>
+      <Component {...pageProps} />
+    </QuestionProvider>
+  </PageRoot>
+);
 
 export default MyApp;
