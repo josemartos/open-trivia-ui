@@ -1,7 +1,8 @@
-import React, { useReducer, createContext } from 'react';
+import React, { useReducer, createContext, useContext } from 'react';
 import { reducer } from './reducer';
 
 export const QuestionContext = createContext();
+export const useQuestionContext = () => useContext(QuestionContext);
 
 const QuestionProvider = ({ children }) => {
   const [selectedQuestion, dispatch] = useReducer(reducer, null);

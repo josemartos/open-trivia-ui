@@ -1,12 +1,11 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useContext } from 'react';
-import { QuestionContext } from 'src/context/QuestionContext';
+import { useQuestionContext } from 'src/context/QuestionContext';
 import QuestionInfo from 'src/components/QuestionInfo';
 
 const QuestionPage = () => {
-  const { selectedQuestion } = useContext(QuestionContext);
+  const { selectedQuestion } = useQuestionContext();
 
   return (
     <section className="question-page">

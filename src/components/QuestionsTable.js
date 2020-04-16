@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Router from 'next/router';
-import { QuestionContext } from '../context/QuestionContext';
+import { useQuestionContext } from '../context/QuestionContext';
 import { selectQuestion } from '../context/actions';
 
 const entities = require('entities');
 
 // TODO: abstract away a table component
 const QuestionsTable = ({ categoryId, questions }) => {
-  const { dispatch } = useContext(QuestionContext);
+  const { dispatch } = useQuestionContext();
 
   const handleClick = (question) => () => {
     // It shallow merges the category id in the question object

@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Head from 'next/head';
 
 import Api from 'src/utils/Api';
-import { QuestionContext } from 'src/context/QuestionContext';
+import { useQuestionContext } from 'src/context/QuestionContext';
 import { resetQuestion } from 'src/context/actions';
 import mediaQuery from 'src/helpers/mediaQuery';
 
@@ -21,7 +21,7 @@ const DropdownWrapper = styled.div`
 `;
 
 const HomePage = () => {
-  const { selectedQuestion, dispatch } = useContext(QuestionContext);
+  const { selectedQuestion, dispatch } = useQuestionContext();
   const [categories, setCategories] = useState([]);
   const [questions, setQuestions] = useState([]);
   const selectedCategoryId = selectedQuestion
