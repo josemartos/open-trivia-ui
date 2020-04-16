@@ -1,8 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const FooterStyled = styled.footer`
+  padding: 1rem 0;
+  font-size: ${({ theme }) => theme.fontSizes.s12};
+`;
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <FooterStyled>
       <div className="page-container">
         <div>
           Icon made by{' '}
@@ -18,7 +24,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-    </footer>
+    </FooterStyled>
   );
 };
 

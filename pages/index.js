@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import styled from 'styled-components';
 import Head from 'next/head';
-import { useEffect, useState, useContext } from 'react';
+
 import Api from 'src/utils/Api';
-import useDropdown from 'src/components/useDropdown';
-import QuestionsTable from 'src/components/QuestionsTable';
 import { QuestionContext } from 'src/context/QuestionContext';
 import { resetQuestion } from 'src/context/actions';
+import mediaQuery from 'src/helpers/mediaQuery';
+
+import useDropdown from 'src/components/useDropdown';
+import QuestionsTable from 'src/components/QuestionsTable';
+
+const DropdownWrapper = styled.div`
+  display: flex;
+  margin-bottom: ${({ theme }) => theme.space.medium};
+  justify-content: flex-start;
+
+  ${mediaQuery.sm} {
+    justify-content: center;
+  }
+`;
 
 const HomePage = () => {
   const { selectedQuestion, dispatch } = useContext(QuestionContext);
@@ -57,13 +70,15 @@ const HomePage = () => {
   }, [categoryId]);
 
   return (
-    <section className="home-page">
+    <section>
       <Head>
         <title>Open Trivia UI - Home</title>
       </Head>
       <article>
         <div className="page-container">
-          <CategoryDropdown />
+          <DropdownWrapper>
+            <CategoryDropdown />
+          </DropdownWrapper>
           {categoryId && questions && (
             <QuestionsTable categoryId={categoryId} questions={questions} />
           )}

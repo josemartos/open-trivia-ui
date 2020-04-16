@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+
+const DropdownStyled = styled.div`
+  select {
+    margin-left: 1rem;
+  }
+
+  @media screen and (max-width: $phablet) {
+    select {
+      margin-left: 0;
+    }
+  }
+`;
 
 const useDropdown = (label, defaultState, options) => {
   const [state, updateState] = useState(defaultState);
   const id = `dropdown-${label.replace(' ', '').toLowerCase()}`;
   const Dropdown = () => (
-    <div className="dropdown">
+    <DropdownStyled>
       <label htmlFor={id}>
         {label}
         <select
@@ -25,7 +38,7 @@ const useDropdown = (label, defaultState, options) => {
           }
         </select>
       </label>
-    </div>
+    </DropdownStyled>
   );
 
   return [state, Dropdown, updateState];
