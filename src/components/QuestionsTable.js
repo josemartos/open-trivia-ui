@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import Router from 'next/router';
 import { QuestionContext } from '../context/QuestionContext';
 import { selectQuestion } from '../context/actions';
@@ -10,7 +10,13 @@ const QuestionsTable = ({ categoryId, questions }) => {
   const { dispatch } = useContext(QuestionContext);
 
   const handleClick = (question) => () => {
-    dispatch(selectQuestion(question, categoryId));
+    // It shallow merges the category id in the question object
+    const newQuestion = {
+      ...question,
+      ...{ category_id: categoryId },
+    };
+
+    dispatch(selectQuestion(newQuestion));
     Router.push('/question');
   };
 

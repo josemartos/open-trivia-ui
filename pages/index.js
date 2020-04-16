@@ -1,10 +1,11 @@
+import React from 'react';
 import Head from 'next/head';
 import { useEffect, useState, useContext } from 'react';
-import Api from '../utils/Api';
-import useDropdown from '../components/useDropdown';
-import QuestionsTable from '../components/QuestionsTable';
-import { QuestionContext } from '../context/QuestionContext';
-import { resetQuestion } from '../context/actions';
+import Api from 'src/utils/Api';
+import useDropdown from 'src/components/useDropdown';
+import QuestionsTable from 'src/components/QuestionsTable';
+import { QuestionContext } from 'src/context/QuestionContext';
+import { resetQuestion } from 'src/context/actions';
 
 const HomePage = () => {
   const { selectedQuestion, dispatch } = useContext(QuestionContext);

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PageRoot from '../components/layout/PageRoot';
-import QuestionProvider from '../context/QuestionContext';
+import PageRoot from 'src/components/layout/PageRoot';
+import QuestionProvider from 'src/context/QuestionContext';
 
 // main styles
 import '../styles/main.scss';

@@ -1,3 +1,5 @@
+import React from 'react';
+
 const entities = require('entities');
 
 const QuestionInfo = ({ question }) => (

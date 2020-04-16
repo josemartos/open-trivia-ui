@@ -1,5 +1,6 @@
+import React from 'react';
 import Link from 'next/link';
-import TriviaIcon from '../public/assets/svg/trivia-icon.svg';
+import TriviaIcon from 'assets/svg/trivia-icon.svg';
 
 const Header = () => {
   return (
