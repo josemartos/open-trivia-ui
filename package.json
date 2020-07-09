@@ -7,7 +7,9 @@
     "dev": "next",
     "build": "next build",
     "start": "npm run build && next start",
-    "lint": "eslint \"./**/*.js\" --quiet"
+    "lint": "eslint \"./**/*.js\" --quiet",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -21,23 +23,30 @@
   },
   "homepage": "https://github.com/josemartos/open-trivia-ui#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.19.2",
     "entities": "^2.0.0",
-    "next": "^9.1.1",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "next": "^9.3.5",
+    "polished": "^3.5.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^4.3.3",
     "@zeit/next-sass": "^1.0.1",
-    "autoprefixer": "^9.6.4",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.5.1",
-    "eslint-plugin-import": "^2.18.2",
+    "autoprefixer": "^9.7.6",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^25.3.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "eslint": "^6.8.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^2.1.2",
-    "node-sass": "^4.12.0"
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "jest": "^25.3.0",
+    "node-sass": "^4.13.1"
   },
   "browserslist": [
     "> 1%",

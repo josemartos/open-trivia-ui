@@ -1,6 +1,6 @@
-# Open Trivia UI
+le# Open Trivia UI
 
-> React, Next.js, ESlint, Sass, PostCSS
+> React, Next.js, ESlint, Sass, PostCSS, Styled Components
 
 ## Description
 
@@ -29,6 +29,10 @@ npm start
 ### Requirements
 
 Node.js 10+
+
+### Notes
+
+Styled Components coexist with the former sass configuration
 
 ## To improve
 

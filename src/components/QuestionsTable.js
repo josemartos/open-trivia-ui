@@ -1,20 +1,24 @@
-import { useContext } from 'react';
+import React from 'react';
 import Router from 'next/router';
-import QuestionContext from '../context/QuestionContext';
+import { useQuestionContext } from '../context/QuestionContext';
+import { selectQuestion } from '../context/actions';
 
 const entities = require('entities');
 
 // TODO: abstract away a table component
-const QuestionsTable = ({ category, questions }) => {
-  // it only gets the setter
-  const [, setSelectedQuestion] = useContext(QuestionContext);
+const QuestionsTable = ({ categoryId, questions }) => {
+  const { dispatch } = useQuestionContext();
 
-  function handleClick(questionInfo) {
-    // It merges the category id into the object
-    questionInfo = { ...questionInfo, ...{ category_id: category } };
-    setSelectedQuestion(questionInfo);
+  const handleClick = (question) => () => {
+    // It shallow merges the category id in the question object
+    const newQuestion = {
+      ...question,
+      ...{ category_id: categoryId },
+    };
+
+    dispatch(selectQuestion(newQuestion));
     Router.push('/question');
-  }
+  };
 
   return (
     <div className="table-wrapper">
@@ -39,8 +43,8 @@ const QuestionsTable = ({ category, questions }) => {
                     title="Discover more"
                     role="link"
                     tabIndex={0}
-                    onClick={() => handleClick(item)}
-                    onKeyPress={() => handleClick(item)}
+                    onClick={handleClick(item)}
+                    onKeyPress={handleClick(item)}
                   >
                     {entities.decodeHTML(item.question)}
                   </a>

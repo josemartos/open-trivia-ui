@@ -1,20 +1,41 @@
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import Head from 'next/head';
-import { useEffect, useState, useContext } from 'react';
-import Api from '../utils/Api';
-import useDropdown from '../components/useDropdown';
-import QuestionsTable from '../components/QuestionsTable';
-import QuestionContext from '../context/QuestionContext';
+
+import Api from 'src/utils/Api';
+import { useQuestionContext } from 'src/context/QuestionContext';
+import { resetQuestion } from 'src/context/actions';
+import mediaQuery from 'src/helpers/mediaQuery';
+
+import useDropdown from 'src/components/useDropdown';
+import QuestionsTable from 'src/components/QuestionsTable';
+
+const DropdownWrapper = styled.div`
+  display: flex;
+  margin-bottom: ${({ theme }) => theme.space.medium};
+  justify-content: flex-start;
+
+  ${mediaQuery.sm} {
+    justify-content: center;
+  }
+`;
 
 const HomePage = () => {
-  const [selectedQuestion, setSelectedQuestion] = useContext(QuestionContext);
+  const { selectedQuestion, dispatch } = useQuestionContext();
   const [categories, setCategories] = useState([]);
   const [questions, setQuestions] = useState([]);
-  const selectedCategory = selectedQuestion ? selectedQuestion.category_id : '';
-  const [category, CategoryDropdown] = useDropdown(
+  const selectedCategoryId = selectedQuestion
+    ? selectedQuestion.category_id
+    : '';
+  const [categoryId, CategoryDropdown] = useDropdown(
     'Category',
-    selectedCategory,
+    selectedCategoryId,
     categories
   );
+
+  const resetQuestions = () => {
+    setQuestions([]);
+  };
 
   useEffect(() => {
     Api.get('/api_category.php')
@@ -28,16 +49,16 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (!category || isNaN(category)) return;
+    if (!categoryId || isNaN(categoryId)) return;
 
-    setQuestions([]);
-    setSelectedQuestion({});
+    resetQuestions();
+    dispatch(resetQuestion());
 
     Api.get('/api.php', {
       params: {
         amount: 10,
-        category
-      }
+        category: categoryId,
+      },
     })
       .then(({ data }) => {
         const { results } = data;
@@ -46,20 +67,20 @@ const HomePage = () => {
       .catch(() => {
         // Handle error!
       });
-  }, [category]);
+  }, [categoryId]);
 
   return (
-    <section className="home-page">
+    <section>
       <Head>
         <title>Open Trivia UI - Home</title>
       </Head>
       <article>
         <div className="page-container">
-          <CategoryDropdown />
-          {category && questions ? (
-            <QuestionsTable category={category} questions={questions} />
-          ) : (
-            ''
+          <DropdownWrapper>
+            <CategoryDropdown />
+          </DropdownWrapper>
+          {categoryId && questions && (
+            <QuestionsTable categoryId={categoryId} questions={questions} />
           )}
         </div>
       </article>

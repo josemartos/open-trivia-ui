@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import Header from '../Header';
 import Footer from '../Footer';
-import QuestionContext from '../../context/QuestionContext';
 
 const PageRoot = ({ children }) => {
   const [preload, setPreload] = useState('preload');
-  // state hook format
-  const selectedQuestion = useState({});
 
   useEffect(() => {
     setPreload('');
@@ -15,9 +13,7 @@ const PageRoot = ({ children }) => {
   return (
     <div className={`page-root ${preload}`}>
       <Header />
-      <QuestionContext.Provider value={selectedQuestion}>
-        <main className="page-main">{children}</main>
-      </QuestionContext.Provider>
+      <main className="page-main">{children}</main>
       <Footer />
     </div>
   );

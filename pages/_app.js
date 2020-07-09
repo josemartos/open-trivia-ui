@@ -1,20 +1,22 @@
 import React from 'react';
-import App from 'next/app';
-import PageRoot from '../components/layout/PageRoot';
+import { ThemeProvider } from 'styled-components';
+
+import theme from 'src/theme';
+
+import PageRoot from 'src/components/layout/PageRoot';
+import QuestionProvider from 'src/context/QuestionContext';
 
 // main styles
 import '../styles/main.scss';
 
-class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props;
-
-    return (
-      <PageRoot>
+const MyApp = ({ Component, pageProps }) => (
+  <ThemeProvider theme={theme}>
+    <PageRoot>
+      <QuestionProvider>
         <Component {...pageProps} />
-      </PageRoot>
-    );
-  }
-}
+      </QuestionProvider>
+    </PageRoot>
+  </ThemeProvider>
+);
 
 export default MyApp;
