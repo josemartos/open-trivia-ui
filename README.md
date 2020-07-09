@@ -1,4 +1,4 @@
-le# Open Trivia UI
+# Open Trivia UI
 
 > React, Next.js, ESlint, Sass, PostCSS, Styled Components
 
